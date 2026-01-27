@@ -33,7 +33,7 @@ public class BoardController {
 		return "board/insertForm";
 	}
 	
-	@GetMapping("/insert")
+	@PostMapping("/insert")
 	public String insert(Board board, Model model) {
 		log.info("insert board="+board.toString());
 		try {
@@ -71,7 +71,7 @@ public class BoardController {
 			if(board==null) {
 				return "board/failed";
 			}
-			model.addAttribute("boardList",board);
+			model.addAttribute("board",board);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

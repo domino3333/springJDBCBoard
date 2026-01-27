@@ -116,7 +116,7 @@
 <div class="container">
     <div class="header-box">
         <h1>BOARD <span>LIST</span></h1>
-        <a href="/board/insert" class="btn-write">New Mission</a>
+        <a href="/board/insertForm" class="btn-write">New Mission</a>
     </div>
 
     <table class="t1-table">
