@@ -125,7 +125,11 @@
 <body>
 
 <div class="container">
-    <h2>게시글 입력 실패</h2>
+
+    <h2>${message}</h2>
+    
+    <a href="/board/insertForm"><button class="btn">게시판 등록</button></a> 
+    <a href="/board/boardList"><button class="btn">게시판 리스트</button></a> 
 
 
 </div>

@@ -62,5 +62,21 @@ public class BoardDao {
 		
 		return boardList.isEmpty() ? null : boardList.get(0);
 	}
+
+	public int deleteBoard(Board board) {
+		
+		String query = "delete from jdbcBoard where no = ?";
+		int count = jdbcTemplate.update(query,board.getNo());
+		
+		return count;
+	}
+
+	public int updateBoard(Board board) {
+		
+		String query = "update jdbcBoard set writer = ?, title = ?,content = ? where no = ?";
+		int count = jdbcTemplate.update(query,board.getWriter(),board.getTitle(),board.getContent(),board.getNo());
+		
+		return count;
+	}
 	
 }
