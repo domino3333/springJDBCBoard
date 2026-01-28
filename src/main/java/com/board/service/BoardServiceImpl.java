@@ -13,8 +13,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardDao boardDAO;
-	
-	
+
 	@Override
 	public int insertBoard(Board board) throws Exception {
 		int count = boardDAO.insertBoard(board);
@@ -29,14 +28,13 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int updateBoard(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDAO.updateBoard(board);
 	}
 
 	@Override
 	public int deleteBoard(Board board) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = boardDAO.deleteBoard(board);
+		return count;
 	}
 
 	@Override
@@ -45,4 +43,9 @@ public class BoardServiceImpl implements BoardService {
 		return boardList;
 	}
 
+	@Override
+	public List<Board> boardSearch(Board board) throws Exception {
+		List<Board> boardList = boardDAO.boardSearch(board);
+		return boardList;
+	}
 }
