@@ -2,6 +2,8 @@ package com.board.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +79,35 @@ public class BoardDao {
 		int count = jdbcTemplate.update(query,board.getWriter(),board.getTitle(),board.getContent(),board.getNo());
 		
 		return count;
+	}
+
+	public List<Board> boardSearch(Board board) {
+//		select * from jdbcBoard where no > 0 and title like '%제%';
+//		select * from jdbcBoard where no > 0 and writer like '%작%';
+//		select * from jdbcBoard where no > 0 and content like '%내%';
+		String searchItem = board.getSearchType();
+		List<String> searchList = Arrays.asList("title","content","writer");
+		if(!searchList.contains(board.getSearchType())) {
+			//검색타입이 존재하지 않으면 기본 검색은 title 로 하게 한다.
+			searchItem ="title";
+		}
+		String query = "select * from jdbcBoard where "+searchItem+" like '%"+board.getKeyword()+"%'";
+		
+		List<Board> boardList = jdbcTemplate.query(query,new RowMapper<Board>() {
+			@Override
+			public Board mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Board board = new Board();
+				board.setNo(rs.getInt("no"));
+				board.setTitle(rs.getString("title"));
+				board.setContent(rs.getString("content"));
+				board.setWriter(rs.getString("writer"));
+				board.setRegDate(rs.getDate("regdate"));
+				return board;
+			}
+		});
+		
+		
+		return boardList;
 	}
 	
 }
